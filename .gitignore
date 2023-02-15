@@ -1,3 +1,16 @@
 *.retry
 roles*
 config.yml
+
+install
+deps
+brew
+dock
+dotfiles
+iterm
+mas
+osx
+shell
+ssh
+system
+sudoers

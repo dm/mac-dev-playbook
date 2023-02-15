@@ -10,3 +10,39 @@
       with_fileglob:
         - "{{ playbook_dir }}/config.yml"
       tags: ['always']
+
+  roles:
+    - role: elliotweiser.osx-command-line-tools
+    - role: geerlingguy.dotfiles
+      tags: ['dotfiles']
+    - role: geerlingguy.mac.homebrew
+      tags: ['homebrew']
+    - role: geerlingguy.mac.mas
+      when: mas_installed_apps or mas_installed_app_ids
+      tags: ['mas']
+
+  tasks:
+    - import_tasks: tasks/dock.yml
+      when: configure_dock
+      tags: ['dock']
+    - import_tasks: tasks/dotfiles.yml
+      when: configure_dotfiles
+      tags: ['dotfiles']
+    - import_tasks: tasks/fonts.yml
+      when: configure_fonts
+      tags: ['system']
+    - import_tasks: tasks/iterm.yml
+      when: configure_iterm
+      tags: ['iterm']
+    - import_tasks: tasks/osx.yml
+      when: configure_osx
+      tags: ['system']
+    - import_tasks: tasks/ssh.yml
+      when: configure_ssh
+      tags: ['ssh']
+    - import_tasks: tasks/sudoers.yml
+      when: configure_sudoers
+      tags: ['sudoers']
+    - import_tasks: tasks/zsh.yml
+      when: configure_zsh
+      tags: ['shell']

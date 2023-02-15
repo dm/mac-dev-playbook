@@ -1,0 +1,47 @@
+- name: Install dockutil
+  ignore_errors: yes
+  community.general.homebrew:
+    name: ["hpedrorodrigues/tools/dockutil"]
+  tags:
+    - install
+    - dock
+
+- name: Clear dock
+  shell: dockutil --remove all --no-restart
+  tags:
+    - install
+    - dock
+
+- name: Setup dock
+  shell: dockutil --add {{ item }} --no-restart
+  with_items:
+    - "'' --type small-spacer --section apps --after SourceTree"
+    - /Applications/VSCodium.app
+    - /Applications/iTerm.app
+    - /Applications/Obsidian.app
+    - /Applications/Sourcetree.app
+    - "'' --type small-spacer --section apps --after SourceTree"
+    - /Applications/Firefox.app
+    - /Applications/Google\ Chrome.app
+    - "'' --type small-spacer --section apps --after 'Google Chrome'"
+    - /Applications/Things3.app
+    - /Applications/Slack.app
+    - /Applications/Discord.app
+    # - /Applications/Thunderbird.app
+    - /Applications/Fantastical.app
+    - "'' --type small-spacer --section apps --after Shottr"
+    - /Applications/Telegram.app
+    - /Applications/Bitwarden.app
+    - /Applications/Spotify.app
+    - /Applications/Authy\ Desktop.app
+    - /Applications/ProtonVPN.app
+  ignore_errors: yes
+  tags:
+    - install
+    - dock
+
+- name: Restart dock
+  shell: "/usr/bin/killall Dock"
+  tags:
+    - install
+    - dock

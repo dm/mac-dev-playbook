@@ -1,0 +1,55 @@
+Host *
+  compression yes
+  tcpkeepalive yes
+  serveraliveinterval 30
+  serveralivecountmax 4
+  #controlmaster auto
+  #controlpath ~/.ssh/connections/%r_%h_%p
+
+host github.com github hub
+  hostname github.com
+  user git
+  identitiesonly yes
+  identityfile ~/.ssh/id_github
+
+host gitlab.com gitlab
+  hostname gitlab.com
+  user git
+  identitiesonly yes
+  identityfile ~/.ssh/id_gitlab
+
+host bitbucket.org
+  hostname bitbucket.org
+  user git
+  identitiesonly yes
+  identityfile ~/.ssh/id_bitbucket
+
+host scuti
+  hostname scuti
+  user dm
+  identitiesonly yes
+  identityfile ~/.ssh/id_scuti
+
+host rdhome
+  hostname rdhome
+  user dm
+  identitiesonly yes
+  identityfile ~/.ssh/id_rsa
+
+host mercury
+  hostname mercury
+  user dm
+  identitiesonly yes
+  identityfile ~/.ssh/id_rsa
+
+host venus
+  hostname venus
+  user dm
+  identitiesonly yes
+  identityfile ~/.ssh/id_rsa
+
+host terra
+  hostname terra
+  user dm
+  identitiesonly yes
+  identityfile ~/.ssh/id_rsa

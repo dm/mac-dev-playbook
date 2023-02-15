@@ -1,0 +1,16 @@
+- name: Ensure .ssh directory exists.
+  file:
+    dest: "~/.ssh"
+    mode: 0700
+    state: directory
+  tags:
+    - personal-ssh
+
+- name: Install sshd_config
+  copy:
+    src: ../templates/ssh_config
+    dest: ~/.ssh/config
+    mode: 0644
+    force: no
+  tags:
+    - personal-ssh

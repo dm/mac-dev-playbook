@@ -1,0 +1,61 @@
+---
+downloads: ~/.ansible-downloads/
+
+configure_dock: true
+configure_dotfiles: true
+configure_fonts: true
+configure_iterm: true
+configure_osx: true
+configure_ssh: true
+configure_sudoers: true
+configure_zsh: true
+
+sudoers_custom_config: ""
+# Example:
+# sudoers_custom_config: |
+#   # Allow users in admin group to use sudo with no password.
+#   %admin ALL=(ALL) NOPASSWD: ALL
+
+dotfiles_repo: git@github.com:dm/dotfiles
+dotfiles_repo_accept_hostkey: true
+dotfiles_repo_local_destination: ~/.dotfiles
+
+homebrew_installed_packages:
+  - bat
+  - curl
+  - direnv
+  - gh
+  - git
+  - git-secrets
+  - gnupg
+  - httpie
+  - make
+  - mas
+  - neovim
+  - openssl
+  - pinentry-mac
+  - p7zip
+  - tmux
+  - tree
+  - wget
+
+homebrew_use_brewfile: true
+homebrew_brewfile_dir: '~/.dotfiles/homebrew/Brewfile'
+
+homebrew_taps:
+  - homebrew/core
+  - homebrew/cask
+
+homebrew_cask_appdir: /Applications
+homebrew_cask_apps:
+  - firefox
+  - iterm2
+
+# See `geerlingguy.mas` role documentation for usage instructions.
+mas_installed_apps:
+  - { name: "Bitwarden", id: 1352778147 }
+  - { name: "Slack", id: 803453959 }
+  - { name: "Telegram", id: 747648890 }
+  - { name: "Textual 7", id: 1262957439 }
+mas_email: ""
+mas_password: ""

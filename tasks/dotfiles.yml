@@ -1,0 +1,35 @@
+- name: Check to see if dotfiles_setup_complete exists
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/.dotfiles/dotfiles_setup_complete"
+  register: dotfiles_setup_complete
+  tags:
+    - dotfiles
+
+- name: Install python requirements
+  ansible.builtin.pip:
+    requirements: "{{ lookup('env', 'HOME') }}/.dotfiles/requirements.txt"
+    virtualenv_command: python3 -m venv
+    virtualenv: "{{ lookup('env', 'HOME') }}/.dotfiles/venv"
+  when: not dotfiles_setup_complete.stat.exists
+  tags:
+    - dotfiles
+
+- name: Execute dotfiles setup
+  command: "{{ lookup('env', 'HOME') }}/.dotfiles/venv/bin/python3 ./setup.py install --overwrite"
+  args:
+    chdir: "{{ lookup('env', 'HOME') }}/.dotfiles/"
+  when: not dotfiles_setup_complete.stat.exists
+  become: true
+  become_method: sudo
+  become_user: "{{ ansible_env.USER }}"
+  become_flags: '-c'
+  tags:
+    - dotfiles
+
+- name: Touch the dotfiles_setup_complete
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/.dotfiles/dotfiles_setup_complete"
+    state: touch
+  when: not dotfiles_setup_complete.stat.exists
+  tags:
+    - dotfiles
